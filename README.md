@@ -16,3 +16,14 @@ From 6 CSV files provided by HR, SQL Database for HR department was created base
 
 
 ### 2. HR Data Analysis
+```sql
+SELECT 	e.emp_no, first_name, last_name, birth_date, hire_date,
+		dept_name, title, t.from_date title_from, salary
+INTO current_employees_full
+FROM employees e
+INNER JOIN titles t ON e.emp_no = t.emp_no
+LEFT JOIN salaries s ON e.emp_no = s.emp_no
+LEFT JOIN dept_emp de ON e.emp_no = de.emp_no
+LEFT JOIN departments d ON de.dept_no = d.dept_no
+WHERE de.to_date = '9999-01-01';		-- Include only current employees
+```
