@@ -58,7 +58,7 @@ ORDER BY COUNT(*) DESC;
 
 
 -- Total New Hire (Employees hired within 4 years)
-SELECT COUNT(*) 
+SELECT COUNT(*), MAX(hire_date)
 FROM current_employees_current_job
 WHERE hire_date >= '1996-01-01';
 
@@ -67,5 +67,14 @@ SELECT dept_name AS "Department", title AS "JOB TITLE", COUNT(*)
 FROM current_employees_current_job
 WHERE hire_date >= '1996-01-01'
 GROUP BY dept_name, title
-HAVING COUNT(*) >= 500
-ORDER BY dept_name, COUNT(*) DESC
+ORDER BY COUNT(*) DESC;
+
+-- Total Number of Candidates for Supervisor
+SELECT COUNT(*)
+FROM candidates_supervisor;
+
+-- Candidates for Supervisor per Department and Job Title
+SELECT dept_name AS "Department", title AS "JOB TITLE", COUNT(*)
+FROM candidates_supervisor
+GROUP BY dept_name, title
+ORDER BY COUNT(*) DESC;
