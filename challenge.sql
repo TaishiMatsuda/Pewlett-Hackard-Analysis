@@ -28,9 +28,15 @@ FROM current_employees_current_job
 WHERE birth_date BETWEEN '1965-01-01' AND '1965-12-31';	
 
 
--- Candidates for part-time mentoring role
+-- Retiring Employees / Candidates for part-time mentoring role
 -- Candidates: 	Employees born between 1952 and 1955 &
 --				Employees hired between 1985 and 1988
+SELECT COUNT(*)
+FROM current_employees_current_job
+WHERE birth_date BETWEEN '1952-01-01' AND '1955-12-31'
+	AND hire_date BETWEEN '1985-01-01' AND '1988-12-31';
+
+-- Retirement per Department by birth year
 SELECT	dept_name AS "Department",
 		COUNT(*) FILTER (WHERE EXTRACT(YEAR from birth_date) = 1952) AS "1952",
 		COUNT(*) FILTER (WHERE EXTRACT(YEAR from birth_date) = 1953) AS "1953",
@@ -40,4 +46,26 @@ SELECT	dept_name AS "Department",
 FROM current_employees_current_job
 WHERE birth_date BETWEEN '1952-01-01' AND '1955-12-31'
 	AND hire_date BETWEEN '1985-01-01' AND '1988-12-31'
-GROUP BY dept_name
+GROUP BY dept_name;
+
+-- Retirement by Job Title
+SELECT	title AS "JOB TITLE", COUNT(*)
+FROM current_employees_current_job
+WHERE birth_date BETWEEN '1952-01-01' AND '1955-12-31'
+	AND hire_date BETWEEN '1985-01-01' AND '1988-12-31'
+GROUP BY title
+ORDER BY COUNT(*) DESC;
+
+
+-- Total New Hire (Employees hired within 4 years)
+SELECT COUNT(*) 
+FROM current_employees_current_job
+WHERE hire_date >= '1996-01-01';
+
+-- New Hire by Department & Title
+SELECT dept_name AS "Department", title AS "JOB TITLE", COUNT(*)
+FROM current_employees_current_job
+WHERE hire_date >= '1996-01-01'
+GROUP BY dept_name, title
+HAVING COUNT(*) >= 500
+ORDER BY dept_name, COUNT(*) DESC
