@@ -37,6 +37,7 @@ WHERE de.to_date = '9999-01-01'; -- Include only current employees
 ```
 
 The top 10 rows of the table look like below.
+
 ![CurrentEmployeeFull](Images/Part1_Step1_Current_Employee_Full.PNG)
 
 
@@ -54,6 +55,7 @@ WHERE JobCount = 1;
 ```
 
 The top 10 rows of the table look like below.
+
 ![CurrentEmployeeFull](Images/Part1_Step2_Current_Employee_Current_Job.PNG)
 
 ### 3. Summary of Analysis
@@ -98,6 +100,7 @@ ORDER BY COUNT(*) DESC;
 The results indicates that;
 * Significantly high number of senior engineers and senior staffs are retiring soon.
 * 2 management position need to be filled soon.
+
 ![RetirementByJob](Images/Retirement_by_JobTitle.PNG)
 
 #### 3.3 New Hire by Department & Job Title
@@ -130,6 +133,7 @@ WHERE birth_date BETWEEN '1965-01-01' AND '1965-12-31';
 ```
 
 The list of individuals who are ready for mentoring looks like below.
+
 ![ForSupervisor](Images/Part1_Step3_Current_Employee_Current_Job_Born1965.PNG)
 
 The list incicates that (similar query as 3.3 used);
